@@ -1,13 +1,19 @@
 import CoreTerminal from '../component/CoreTerminal';
 
-import genereteNum from '../component/plagins/generateNum'
+import GenereteNum from '../component/plagins/GenerateNum'
+import YesOrNo from '../component/plagins/YesOrNo';
+
 
 function rootUser () {
     const rootComands = [
         {
             command: ["num"],
-            nextStep: genereteNum()
+            nextStep: GenereteNum()
         },
+        {
+            command: ['yorn'],
+            nextStep: YesOrNo()
+        }
     ]
     
     const rootTerminal = new CoreTerminal('root', rootComands, {password: 123});

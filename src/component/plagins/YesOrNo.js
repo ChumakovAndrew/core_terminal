@@ -1,7 +1,7 @@
 
 function YesOrNo() {
 
-    const firs = () => {
+    const first = () => {
         const num = Math.floor(Math.random() * (100 - 0) + 0)
         if(num % 2 == 0){
             console.log("yes")
@@ -10,19 +10,9 @@ function YesOrNo() {
         }
         
     }
-
-    const second = (message) => {
-        if(message == 'back'){
-        
-        return 'back'
-    }
-    else{
-        return 'replay'
-    }
-}
    
 
-    const yorn = [firs, second]
+    const yorn = [first]
 
     return yorn
 }

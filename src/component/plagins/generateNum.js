@@ -1,5 +1,5 @@
 
-function genereteNum() {
+function GenereteNum() {
 
     const firs = () => {
         console.log("press ener to get a random number")
@@ -18,4 +18,4 @@ function genereteNum() {
     return yorn
 }
 
-export default genereteNum
+export default GenereteNum

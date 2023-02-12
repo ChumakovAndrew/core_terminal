@@ -175,14 +175,25 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 
 /***/ }),
 
-/***/ "./src/component/plagins/generateNum.js":
+/***/ "./src/component/plagins/GenerateNum.js":
 /*!**********************************************!*\
-  !*** ./src/component/plagins/generateNum.js ***!
+  !*** ./src/component/plagins/GenerateNum.js ***!
   \**********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n\r\nfunction genereteNum() {\r\n\r\n    const firs = () => {\r\n        console.log(\"press ener to get a random number\")\r\n        \r\n    }\r\n    const second = (message) => {\r\n        const num = Math.floor(Math.random() * (10 - 0) + 0)\r\n        console.log(num)\r\n    }\r\n    \r\n\r\n   \r\n\r\n    const yorn = [firs, second]\r\n\r\n    return yorn\r\n}\r\n\r\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (genereteNum);\n\n//# sourceURL=webpack://nano_bot/./src/component/plagins/generateNum.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n\r\nfunction GenereteNum() {\r\n\r\n    const firs = () => {\r\n        console.log(\"press ener to get a random number\")\r\n        \r\n    }\r\n    const second = (message) => {\r\n        const num = Math.floor(Math.random() * (10 - 0) + 0)\r\n        console.log(num)\r\n    }\r\n    \r\n\r\n   \r\n\r\n    const yorn = [firs, second]\r\n\r\n    return yorn\r\n}\r\n\r\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (GenereteNum);\n\n//# sourceURL=webpack://nano_bot/./src/component/plagins/GenerateNum.js?");
+
+/***/ }),
+
+/***/ "./src/component/plagins/YesOrNo.js":
+/*!******************************************!*\
+  !*** ./src/component/plagins/YesOrNo.js ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n\r\nfunction YesOrNo() {\r\n\r\n    const first = () => {\r\n        const num = Math.floor(Math.random() * (100 - 0) + 0)\r\n        if(num % 2 == 0){\r\n            console.log(\"yes\")\r\n        }else{\r\n            console.log(\"no\")\r\n        }\r\n        \r\n    }\r\n   \r\n\r\n    const yorn = [first]\r\n\r\n    return yorn\r\n}\r\n\r\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (YesOrNo);\n\n//# sourceURL=webpack://nano_bot/./src/component/plagins/YesOrNo.js?");
 
 /***/ }),
 
@@ -204,7 +215,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _com
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _component_CoreTerminal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../component/CoreTerminal */ \"./src/component/CoreTerminal.js\");\n/* harmony import */ var _component_plagins_generateNum__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../component/plagins/generateNum */ \"./src/component/plagins/generateNum.js\");\n\r\n\r\n\r\n\r\nfunction rootUser () {\r\n    const rootComands = [\r\n        {\r\n            command: [\"num\"],\r\n            nextStep: (0,_component_plagins_generateNum__WEBPACK_IMPORTED_MODULE_1__[\"default\"])()\r\n        },\r\n    ]\r\n    \r\n    const rootTerminal = new _component_CoreTerminal__WEBPACK_IMPORTED_MODULE_0__[\"default\"]('root', rootComands, {password: 123});\r\n\r\n    return rootTerminal\r\n}\r\n\r\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (rootUser);\r\n\n\n//# sourceURL=webpack://nano_bot/./src/users/rootUser.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _component_CoreTerminal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../component/CoreTerminal */ \"./src/component/CoreTerminal.js\");\n/* harmony import */ var _component_plagins_GenerateNum__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../component/plagins/GenerateNum */ \"./src/component/plagins/GenerateNum.js\");\n/* harmony import */ var _component_plagins_YesOrNo__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../component/plagins/YesOrNo */ \"./src/component/plagins/YesOrNo.js\");\n\r\n\r\n\r\n\r\n\r\n\r\nfunction rootUser () {\r\n    const rootComands = [\r\n        {\r\n            command: [\"num\"],\r\n            nextStep: (0,_component_plagins_GenerateNum__WEBPACK_IMPORTED_MODULE_1__[\"default\"])()\r\n        },\r\n        {\r\n            command: ['yorn'],\r\n            nextStep: (0,_component_plagins_YesOrNo__WEBPACK_IMPORTED_MODULE_2__[\"default\"])()\r\n        }\r\n    ]\r\n    \r\n    const rootTerminal = new _component_CoreTerminal__WEBPACK_IMPORTED_MODULE_0__[\"default\"]('root', rootComands, {password: 123});\r\n\r\n    return rootTerminal\r\n}\r\n\r\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (rootUser);\r\n\n\n//# sourceURL=webpack://nano_bot/./src/users/rootUser.js?");
 
 /***/ }),
 

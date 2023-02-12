@@ -36,13 +36,14 @@ class myBot {
         }
 
     loop = (arrCommand = this.arrayCommand) => {
+
         let message = this.getMessage(this.user)
 
         arrCommand.forEach(element => {
             const {command, nextStep} = element
 
             if(command.indexOf(message) > -1) {
-                this.scene(this.user, nextStep)
+                message = this.scene(this.user, nextStep)
             }
         });
 
@@ -70,12 +71,18 @@ class myBot {
 
     scene = (user, arrfunction) => {
         let sceneExit = false
-
+        let count = false
+        let response
         for(const func of arrfunction){
-            const message = this.getMessage(user)
+            let message 
+            if(!count){
+                count = true;
+            }else{
+                message = this.getMessage(user)
+            }
 
-
-            const response = this.exitScene(message, func)
+            response = this.exitScene(message, func)
+            console.log(response)
 
             if(response === 'break'){
                 break;
@@ -89,10 +96,7 @@ class myBot {
             }
         }
 
-        if(sceneExit){
-            console.log("bb")
-        }
-
+        return response
     }
 
 }

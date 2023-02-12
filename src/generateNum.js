@@ -1,18 +1,19 @@
 
 function genereteNum() {
 
-    const firs = (message) => {
+    const firs = () => {
+        console.log("press ener to get a random number")
+        
+    }
+    const second = (message) => {
         const num = Math.floor(Math.random() * (10 - 0) + 0)
         console.log(num)
-
-        return 'break'
-       
     }
     
 
    
 
-    const yorn = [firs]
+    const yorn = [firs, second]
 
     return yorn
 }

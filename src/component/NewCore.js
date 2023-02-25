@@ -18,61 +18,60 @@ class NewCoreTerminal {
         this.commands = commands
     }
 
+    fetchInform = (config = this.config.descripton) => {
+        const {ascii} = config
 
-    launch = () => {
-        function sliseAscii ( ascii, num ) {
+            let fileContent = fs.readFileSync(ascii.fileName , "utf8")
+
+        
             const data = []
             let start = 0
-            let end = num
-        
-            for(let i = 0; i < ascii.length - num; i += num ){
-                data.push({asciiString: (ascii.slice(start, end)), string: ''})
-                start += num + 1
-                end = start + num  
-            }
-            return data
-        }
-        
-        function postInformation (data, config, offset = 3) {
-            let id = 0
+            let end = ascii.characterСount
+            let id = 2
             let maxid = Object.keys(config).length
         
+
+
+            for(let i = 0; i < fileContent.length - ascii.characterСount ; i += ascii.characterСount ){
+                data.push({asciiString: (fileContent.slice(start, end)), string: ''})
+                start += ascii.characterСount + 1
+                end = start + ascii.characterСount  
+            }
+            
+
             data.forEach((item, i) => {
-                if( i > offset && maxid > id){
+                if( i > config.offset && maxid > id){
                     let key = Object.keys(config)[id]
-                    item.string = `${Object.keys(config)[id].black} : ${config[key]}`
+                    item.string = `${Object.keys(config)[id].blue} : ${config[key]}`
                     id++
                 }
             });
-        
+
+
             const newArr = data.map((item) => {
                 return `${item.asciiString}     ${item.string} \n`
             })
+            console.log('')
             console.log(newArr.join(''))
-        }
-
-        const config = {
-            age: 22,
-            name: 'Andrew',
-
-        }
-        console.log('')
-        let fileContent = fs.readFileSync("ascii-art (1).txt", "utf8")
-        const arr = sliseAscii(fileContent, 42)
-        postInformation(arr, config, 2)
-
-
         
-        
+    }
+
+
+    launch = () => {
         this.message = prompt('введите пароль ')
-
-        this.message == this.config.userPassword ? this.getMessage() : console.log('неверный пароль'.red)
+        if( this.message == this.config.userPassword){
+            this.fetchInform()
+            this.getMessage()
         }
+        else{
+            console.log('неверный пароль'.red)
+        }
+    }
     
 
     getMessage = () => {
         const {userName, terminalName} = this.config
-        this.message = prompt(terminalName.black + '@' + userName + ' ')
+        this.message = prompt(terminalName.blue + '@' + userName.red + ' ')
 
         if(this.message === 'exit'){
             return
@@ -94,11 +93,19 @@ class NewCoreTerminal {
 }
 
 
+
  const config = {
     userName: 'root',
-    userPassword: 'andrew',
-    terminalName: 'nana',
-    terminalWelcomeText: 'terminal nana'
+    userPassword: 'root',
+    terminalName: 'nano',
+    terminalWelcomeText: 'nanoTerm',
+    descripton: {
+        ascii: {fileName: "ascii-art (1).txt", characterСount: 42},
+        offset: 0,
+        terninal: 'nanoTerm',
+        version: '1.0.1',
+        user: 'root',
+        }
  }
 
 
@@ -108,9 +115,7 @@ const core = new NewCoreTerminal(config)
 const commands = () => {
     core.useCommand('hello', () => {console.log('hi broo')})
     core.useCommand('set', () => {core.setMessage('newMessage')})
-    core.useCommand('log', () => {
-       
-    })
+    core.useCommand('log', () => {core.fetchInform()})
 }
 
 core.setConfig(commands)

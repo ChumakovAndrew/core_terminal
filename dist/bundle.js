@@ -164,58 +164,14 @@ eval("\nconst ansiRegex = __webpack_require__(/*! ansi-regex */ \"./node_modules
 
 /***/ }),
 
-/***/ "./src/component/CoreTerminal.js":
-/*!***************************************!*\
-  !*** ./src/component/CoreTerminal.js ***!
-  \***************************************/
+/***/ "./src/component/NewCore.js":
+/*!**********************************!*\
+  !*** ./src/component/NewCore.js ***!
+  \**********************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var prompt_sync__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! prompt-sync */ \"./node_modules/prompt-sync/index.js\");\n/* harmony import */ var prompt_sync__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(prompt_sync__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var colors__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! colors */ \"./node_modules/colors/lib/index.js\");\n/* harmony import */ var colors__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(colors__WEBPACK_IMPORTED_MODULE_1__);\n\r\n\r\nconst prompt = prompt_sync__WEBPACK_IMPORTED_MODULE_0___default()()\r\n\r\nclass CoreTerminal {\r\n    constructor(user, arrayCommand, config){\r\n        this.user = user\r\n        this.arrayCommand = arrayCommand\r\n        this.config = config\r\n    }\r\n\r\n    \r\n\r\n    start = () => {\r\n            console.log('hello, you login to ' + this.user)\r\n            this.loop()\r\n    }\r\n\r\n\r\n    loop = (arrCommand = this.arrayCommand) => {\r\n\r\n        let message = this.getMessage(this.user) // получение message\r\n\r\n        arrCommand.forEach(element => {    // перебор массива с командами\r\n            const {command, nextStep} = element\r\n\r\n            if(command.indexOf(message) > -1) {     // проверка на совподение команды и меседжа\r\n                message = this.scene(this.user, nextStep)   // запуск сцены которая соответствует команде\r\n            }\r\n        });\r\n\r\n        if(message !== 'exit'){     // если сцена возвращает \"exit\" то поток выполнения заканчивается\r\n            this.loop()             //  если сцена возвращает чтото другое то запускается рекурсия\r\n        }\r\n        \r\n\r\n    }\r\n\r\n\r\n   \r\n\r\n    getMessage = (user = this.user) => {      \r\n        return prompt('nano-terminal@'.green + user.blue + ': ')\r\n    }\r\n\r\n    // exitScene = (message, functn) => {\r\n    //     if(message === 'exit'){\r\n    //         return 'exit'\r\n    //     }\r\n    //     return functn(message)\r\n    // }\r\n        \r\n\r\n    scene = (user, arrfunction) => {    //  сцена принимает в себя юзера и массив с функциями\r\n        let sceneExit = false\r\n        let count = false\r\n        let response\r\n        for(const func of arrfunction){\r\n\r\n            let message = ''\r\n\r\n            !count ? count = true  :  message = this.getMessage(user)  // это делается для того что бы при запуске сцены не запускаля лишний getMessage\r\n\r\n           \r\n            response = (message === \"exit\") ? 'exit' : func(message)    //если в ходе выполнения сцены пользователь вводит exit то возвращается exit \r\n                                                                        //если нет то запускается функция которая тоже может вернуть какой то флаг\r\n            if(response === 'break'){                                   \r\n                break;\r\n            }\r\n            if(response === 'exit'){\r\n                sceneExit = true\r\n                break\r\n            }\r\n            if(response === \"continue\"){\r\n                this.loop()\r\n            }\r\n        }\r\n\r\n        return response     \r\n    }\r\n\r\n}\r\n\r\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (CoreTerminal);\n\n//# sourceURL=webpack://nano_bot/./src/component/CoreTerminal.js?");
-
-/***/ }),
-
-/***/ "./src/component/plagins/GenerateNum.js":
-/*!**********************************************!*\
-  !*** ./src/component/plagins/GenerateNum.js ***!
-  \**********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n\r\nfunction GenereteNum() {\r\n\r\n    const firs = () => {\r\n        console.log(\"press ener to get a random number\")\r\n        \r\n    }\r\n    const second = (message) => {\r\n        const num = Math.floor(Math.random() * (10 - 0) + 0)\r\n        console.log(num)\r\n    }\r\n    \r\n\r\n   \r\n\r\n    const yorn = [firs, second]\r\n\r\n    return yorn\r\n}\r\n\r\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (GenereteNum);\n\n//# sourceURL=webpack://nano_bot/./src/component/plagins/GenerateNum.js?");
-
-/***/ }),
-
-/***/ "./src/component/plagins/YesOrNo.js":
-/*!******************************************!*\
-  !*** ./src/component/plagins/YesOrNo.js ***!
-  \******************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n\r\nfunction YesOrNo() {\r\n\r\n    const first = () => {\r\n        const num = Math.floor(Math.random() * (100 - 0) + 0)\r\n        if(num % 2 == 0){\r\n            console.log(\"yes\")\r\n        }else{\r\n            console.log(\"no\")\r\n        }\r\n        \r\n    }\r\n   \r\n\r\n    const yorn = [first]\r\n\r\n    return yorn\r\n}\r\n\r\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (YesOrNo);\n\n//# sourceURL=webpack://nano_bot/./src/component/plagins/YesOrNo.js?");
-
-/***/ }),
-
-/***/ "./src/index.js":
-/*!**********************!*\
-  !*** ./src/index.js ***!
-  \**********************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _component_CoreTerminal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./component/CoreTerminal */ \"./src/component/CoreTerminal.js\");\n/* harmony import */ var colors__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! colors */ \"./node_modules/colors/lib/index.js\");\n/* harmony import */ var colors__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(colors__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _users_rootUser__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./users/rootUser */ \"./src/users/rootUser.js\");\n\r\n\r\n// users\r\n\r\n\r\nconst root = (0,_users_rootUser__WEBPACK_IMPORTED_MODULE_2__[\"default\"])()\r\n\r\n\r\n\r\nfunction startUserTerminal (terminal) {\r\n\r\n    const first = () => {\r\n        console.log('введите пароль')\r\n    }\r\n    const second = (message) => {\r\n        message == terminal.config.password ? terminal.start() : console.log('неверный пароль'.red)\r\n    }\r\n\r\n    return [first, second]\r\n\r\n}\r\n\r\n\r\nconst arrNano = [\r\n    {\r\n        command: [\"root\"],\r\n        nextStep: startUserTerminal(root)\r\n    }\r\n]\r\n\r\n\r\nconst nanoTerminal = new _component_CoreTerminal__WEBPACK_IMPORTED_MODULE_0__[\"default\"]('nano', arrNano);\r\n\r\nnanoTerminal.start()\r\n\r\n\n\n//# sourceURL=webpack://nano_bot/./src/index.js?");
-
-/***/ }),
-
-/***/ "./src/users/rootUser.js":
-/*!*******************************!*\
-  !*** ./src/users/rootUser.js ***!
-  \*******************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _component_CoreTerminal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../component/CoreTerminal */ \"./src/component/CoreTerminal.js\");\n/* harmony import */ var _component_plagins_GenerateNum__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../component/plagins/GenerateNum */ \"./src/component/plagins/GenerateNum.js\");\n/* harmony import */ var _component_plagins_YesOrNo__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../component/plagins/YesOrNo */ \"./src/component/plagins/YesOrNo.js\");\n\r\n\r\n\r\n\r\n\r\n\r\nfunction rootUser () {\r\n    const rootComands = [\r\n        {\r\n            command: [\"num\"],\r\n            nextStep: (0,_component_plagins_GenerateNum__WEBPACK_IMPORTED_MODULE_1__[\"default\"])()\r\n        },\r\n        {\r\n            command: ['yorn'],\r\n            nextStep: (0,_component_plagins_YesOrNo__WEBPACK_IMPORTED_MODULE_2__[\"default\"])()\r\n        }\r\n    ]\r\n    \r\n    const rootTerminal = new _component_CoreTerminal__WEBPACK_IMPORTED_MODULE_0__[\"default\"]('root', rootComands, {password: 123});\r\n\r\n    return rootTerminal\r\n}\r\n\r\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (rootUser);\r\n\n\n//# sourceURL=webpack://nano_bot/./src/users/rootUser.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var prompt_sync__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! prompt-sync */ \"./node_modules/prompt-sync/index.js\");\n/* harmony import */ var prompt_sync__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(prompt_sync__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var colors__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! colors */ \"./node_modules/colors/lib/index.js\");\n/* harmony import */ var colors__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(colors__WEBPACK_IMPORTED_MODULE_1__);\n\r\n\r\nconst fs = __webpack_require__(/*! fs */ \"fs\");\r\nconst prompt = prompt_sync__WEBPACK_IMPORTED_MODULE_0___default()()\r\n\r\nclass NewCoreTerminal {\r\n    constructor(config){\r\n        this.config = config\r\n\r\n        \r\n    }\r\n\r\n    message = ''; \r\n    commands\r\n\r\n\r\n    setConfig = (commands) => {\r\n        this.commands = commands\r\n    }\r\n\r\n\r\n    launch = () => {\r\n        function sliseAscii ( ascii, num ) {\r\n            const data = []\r\n            let start = 0\r\n            let end = num\r\n        \r\n            for(let i = 0; i < ascii.length - num; i += num ){\r\n                data.push({asciiString: (ascii.slice(start, end)), string: ''})\r\n                start += num + 1\r\n                end = start + num  \r\n            }\r\n            return data\r\n        }\r\n        \r\n        function postInformation (data, config, offset = 3) {\r\n            let id = 0\r\n            let maxid = Object.keys(config).length\r\n        \r\n            data.forEach((item, i) => {\r\n                if( i > offset && maxid > id){\r\n                    let key = Object.keys(config)[id]\r\n                    item.string = `${Object.keys(config)[id].black} : ${config[key]}`\r\n                    id++\r\n                }\r\n            });\r\n        \r\n            const newArr = data.map((item) => {\r\n                return `${item.asciiString}     ${item.string} \\n`\r\n            })\r\n            console.log(newArr.join(''))\r\n        }\r\n\r\n        const config = {\r\n            age: 22,\r\n            name: 'Andrew',\r\n\r\n        }\r\n        console.log('')\r\n        let fileContent = fs.readFileSync(\"ascii-art (1).txt\", \"utf8\")\r\n        const arr = sliseAscii(fileContent, 42)\r\n        postInformation(arr, config, 2)\r\n\r\n\r\n        \r\n        \r\n        this.message = prompt('введите пароль ')\r\n\r\n        this.message == this.config.userPassword ? this.getMessage() : console.log('неверный пароль'.red)\r\n        }\r\n    \r\n\r\n    getMessage = () => {\r\n        const {userName, terminalName} = this.config\r\n        this.message = prompt(terminalName.black + '@' + userName + ' ')\r\n\r\n        if(this.message === 'exit'){\r\n            return\r\n        }\r\n\r\n        this.commands()\r\n        this.getMessage()\r\n\r\n        \r\n    }\r\n\r\n   \r\n     useCommand = (command, func) => {\r\n        if(this.message === command){\r\n            func() \r\n        }\r\n    }\r\n\r\n}\r\n\r\n\r\n const config = {\r\n    userName: 'root',\r\n    userPassword: 'andrew',\r\n    terminalName: 'nana',\r\n    terminalWelcomeText: 'terminal nana'\r\n }\r\n\r\n\r\n\r\nconst core = new NewCoreTerminal(config)\r\n\r\nconst commands = () => {\r\n    core.useCommand('hello', () => {console.log('hi broo')})\r\n    core.useCommand('set', () => {core.setMessage('newMessage')})\r\n    core.useCommand('log', () => {\r\n       \r\n    })\r\n}\r\n\r\ncore.setConfig(commands)\r\ncore.launch()\r\n\r\n\r\n\r\n\n\n//# sourceURL=webpack://nano_bot/./src/component/NewCore.js?");
 
 /***/ }),
 
@@ -324,7 +280,7 @@ module.exports = require("util");
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module can't be inlined because the eval devtool is used.
-/******/ 	var __webpack_exports__ = __webpack_require__("./src/index.js");
+/******/ 	var __webpack_exports__ = __webpack_require__("./src/component/NewCore.js");
 /******/ 	
 /******/ })()
 ;

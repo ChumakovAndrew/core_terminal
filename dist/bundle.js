@@ -164,14 +164,69 @@ eval("\nconst ansiRegex = __webpack_require__(/*! ansi-regex */ \"./node_modules
 
 /***/ }),
 
-/***/ "./src/component/NewCore.js":
-/*!**********************************!*\
-  !*** ./src/component/NewCore.js ***!
-  \**********************************/
+/***/ "./src/component/Core.js":
+/*!*******************************!*\
+  !*** ./src/component/Core.js ***!
+  \*******************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var prompt_sync__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! prompt-sync */ \"./node_modules/prompt-sync/index.js\");\n/* harmony import */ var prompt_sync__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(prompt_sync__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var colors__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! colors */ \"./node_modules/colors/lib/index.js\");\n/* harmony import */ var colors__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(colors__WEBPACK_IMPORTED_MODULE_1__);\n\r\n\r\nconst fs = __webpack_require__(/*! fs */ \"fs\");\r\nconst prompt = prompt_sync__WEBPACK_IMPORTED_MODULE_0___default()()\r\n\r\nclass NewCoreTerminal {\r\n    constructor(config){\r\n        this.config = config\r\n\r\n        \r\n    }\r\n\r\n    message = ''; \r\n    commands\r\n\r\n\r\n    setConfig = (commands) => {\r\n        this.commands = commands\r\n    }\r\n\r\n    fetchInform = (config = this.config.descripton) => {\r\n        const {ascii} = config\r\n\r\n            let fileContent = fs.readFileSync(ascii.fileName , \"utf8\")\r\n\r\n        \r\n            const data = []\r\n            let start = 0\r\n            let end = ascii.characterСount\r\n            let id = 2\r\n            let maxid = Object.keys(config).length\r\n        \r\n\r\n\r\n            for(let i = 0; i < fileContent.length - ascii.characterСount ; i += ascii.characterСount ){\r\n                data.push({asciiString: (fileContent.slice(start, end)), string: ''})\r\n                start += ascii.characterСount + 1\r\n                end = start + ascii.characterСount  \r\n            }\r\n            \r\n\r\n            data.forEach((item, i) => {\r\n                if( i > config.offset && maxid > id){\r\n                    let key = Object.keys(config)[id]\r\n                    item.string = `${Object.keys(config)[id].blue} : ${config[key]}`\r\n                    id++\r\n                }\r\n            });\r\n\r\n\r\n            const newArr = data.map((item) => {\r\n                return `${item.asciiString}     ${item.string} \\n`\r\n            })\r\n            console.log('')\r\n            console.log(newArr.join(''))\r\n        \r\n    }\r\n\r\n\r\n    launch = () => {\r\n        this.message = prompt('введите пароль ')\r\n        if( this.message == this.config.userPassword){\r\n            this.fetchInform()\r\n            this.getMessage()\r\n        }\r\n        else{\r\n            console.log('неверный пароль'.red)\r\n        }\r\n    }\r\n    \r\n\r\n    getMessage = () => {\r\n        const {userName, terminalName} = this.config\r\n        this.message = prompt(terminalName.blue + '@' + userName.red + ' ')\r\n\r\n        if(this.message === 'exit'){\r\n            return\r\n        }\r\n\r\n        this.commands()\r\n        this.getMessage()\r\n\r\n        \r\n    }\r\n\r\n   \r\n     useCommand = (command, func) => {\r\n        if(this.message === command){\r\n            func() \r\n        }\r\n    }\r\n\r\n}\r\n\r\n\r\n\r\n const config = {\r\n    userName: 'root',\r\n    userPassword: 'root',\r\n    terminalName: 'nano',\r\n    terminalWelcomeText: 'nanoTerm',\r\n    descripton: {\r\n        ascii: {fileName: \"ascii-art (1).txt\", characterСount: 42},\r\n        offset: 0,\r\n        terninal: 'nanoTerm',\r\n        version: '1.0.1',\r\n        user: 'root',\r\n        }\r\n }\r\n\r\n\r\n\r\nconst core = new NewCoreTerminal(config)\r\n\r\nconst commands = () => {\r\n    core.useCommand('hello', () => {console.log('hi broo')})\r\n    core.useCommand('set', () => {core.setMessage('newMessage')})\r\n    core.useCommand('log', () => {core.fetchInform()})\r\n}\r\n\r\ncore.setConfig(commands)\r\ncore.launch()\r\n\r\n\r\n\r\n\n\n//# sourceURL=webpack://nano_bot/./src/component/NewCore.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var prompt_sync__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! prompt-sync */ \"./node_modules/prompt-sync/index.js\");\n/* harmony import */ var prompt_sync__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(prompt_sync__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var colors__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! colors */ \"./node_modules/colors/lib/index.js\");\n/* harmony import */ var colors__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(colors__WEBPACK_IMPORTED_MODULE_1__);\n\r\n\r\nconst fs = __webpack_require__(/*! fs */ \"fs\");\r\nconst prompt = prompt_sync__WEBPACK_IMPORTED_MODULE_0___default()()\r\n\r\nclass Core {\r\n    constructor(config){\r\n        this.config = config\r\n    }\r\n\r\n    message = ''\r\n    commands\r\n    colorTerm\r\n\r\n\r\n    setConfig = (commands) => {\r\n        this.commands = commands\r\n        this.colorTerm = this.config.colorTerm === 'root' ? (colors__WEBPACK_IMPORTED_MODULE_1___default().red) : (colors__WEBPACK_IMPORTED_MODULE_1___default().blue)\r\n    }\r\n\r\n    launch = () => {\r\n        console.log(this.config.colorTerm)\r\n        this.message = prompt('введите пароль ')\r\n        if( this.message == this.config.userPassword){\r\n            this.getMessage()\r\n        }\r\n        else{\r\n            console.log('неверный пароль'.red)\r\n        }\r\n    }\r\n    \r\n\r\n    getMessage = () => {\r\n        const {userName, terminalName} = this.config\r\n        this.message = prompt(terminalName.blue + '@' + this.colorTerm(userName) + ' ')\r\n\r\n        if(this.message === 'exit'){\r\n            return\r\n        }\r\n\r\n        this.commands()\r\n        this.getMessage()\r\n        \r\n    }\r\n\r\n    сommand = (command, func) => {\r\n        if(this.message === command){\r\n            func() \r\n        }\r\n    }\r\n\r\n}\r\n\r\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Core);\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\n\n//# sourceURL=webpack://nano_bot/./src/component/Core.js?");
+
+/***/ }),
+
+/***/ "./src/component/plagins/nanofetch.js":
+/*!********************************************!*\
+  !*** ./src/component/plagins/nanofetch.js ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var prompt_sync__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! prompt-sync */ \"./node_modules/prompt-sync/index.js\");\n/* harmony import */ var prompt_sync__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(prompt_sync__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var colors__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! colors */ \"./node_modules/colors/lib/index.js\");\n/* harmony import */ var colors__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(colors__WEBPACK_IMPORTED_MODULE_1__);\n\r\n\r\nconst fs = __webpack_require__(/*! fs */ \"fs\");\r\nconst prompt = prompt_sync__WEBPACK_IMPORTED_MODULE_0___default()()\r\n\r\n\r\nconst nanoFetch = (config) => {\r\n\r\n    const {nanoFetchConfig, colorTerm} = config\r\n    const {ascii} = nanoFetchConfig\r\n\r\n    const nanoColor = colorTerm === 'root' ? (colors__WEBPACK_IMPORTED_MODULE_1___default().red) : (colors__WEBPACK_IMPORTED_MODULE_1___default().blue)\r\n\r\n    const data = []\r\n    let fileContent = fs.readFileSync(ascii.fileName , \"utf8\")\r\n\r\n    let start = 0\r\n    let end = ascii.characterСount\r\n    let id = 2\r\n    let maxid = Object.keys(nanoFetchConfig).length\r\n\r\n\r\n    for(let i = 0; i < fileContent.length - ascii.characterСount ; i += ascii.characterСount ){\r\n        data.push({asciiString: (fileContent.slice(start, end)), string: ''})\r\n        start += ascii.characterСount + 1\r\n        end = start + ascii.characterСount  \r\n    }\r\n    \r\n\r\n    data.forEach((item, i) => {\r\n        if( i > nanoFetchConfig.offset && maxid > id){\r\n            let key = Object.keys(nanoFetchConfig)[id]\r\n            item.string = `${nanoColor(Object.keys(nanoFetchConfig)[id])} : ${nanoFetchConfig[key]}`\r\n            id++\r\n        }\r\n    });\r\n\r\n\r\n    const newArr = data.map((item) => {\r\n        return `${item.asciiString}     ${item.string} \\n`\r\n    })\r\n    console.log('')\r\n    console.log(newArr.join(''))\r\n    \r\n}\r\n\r\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (nanoFetch);\n\n//# sourceURL=webpack://nano_bot/./src/component/plagins/nanofetch.js?");
+
+/***/ }),
+
+/***/ "./src/component/users/defaultUser.js":
+/*!********************************************!*\
+  !*** ./src/component/users/defaultUser.js ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _Core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Core */ \"./src/component/Core.js\");\n/* harmony import */ var _plagins_nanofetch__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../plagins/nanofetch */ \"./src/component/plagins/nanofetch.js\");\n\r\n\r\nfunction defaultUser () {\r\n\r\n    const config = {\r\n        userName: 'user',\r\n        userPassword: '',\r\n        terminalName: 'nano',\r\n        terminalWelcomeText: 'nanoTerm',\r\n        colorTerm: 'default',\r\n        nanoFetchConfig: {\r\n            ascii: {fileName: \"ascii-art (1).txt\", characterСount: 42},\r\n            offset: 0,\r\n            terninal: 'nanoTerm',\r\n            version: '1.0.1',\r\n            user: 'user',\r\n        }\r\n     }\r\n    \r\n    \r\n    const user = new _Core__WEBPACK_IMPORTED_MODULE_0__[\"default\"](config)\r\n    \r\n    const commands = (userTerm) => () => {\r\n        userTerm.сommand('hello', () => {console.log('hi broo')})\r\n        userTerm.сommand('nanoFetch', () => {;(0,_plagins_nanofetch__WEBPACK_IMPORTED_MODULE_1__[\"default\"])(config)})\r\n    }\r\n    \r\n    user.setConfig(commands(user))\r\n    \r\n    return user\r\n}\r\n\r\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (defaultUser);\n\n//# sourceURL=webpack://nano_bot/./src/component/users/defaultUser.js?");
+
+/***/ }),
+
+/***/ "./src/component/users/index.js":
+/*!**************************************!*\
+  !*** ./src/component/users/index.js ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"root\": () => (/* binding */ root),\n/* harmony export */   \"user\": () => (/* binding */ user)\n/* harmony export */ });\n/* harmony import */ var _rootUser__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./rootUser */ \"./src/component/users/rootUser.js\");\n/* harmony import */ var _defaultUser__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./defaultUser */ \"./src/component/users/defaultUser.js\");\n\r\n\r\n\r\n\r\nconst root = (0,_rootUser__WEBPACK_IMPORTED_MODULE_0__[\"default\"])()\r\nconst user = (0,_defaultUser__WEBPACK_IMPORTED_MODULE_1__[\"default\"])()\r\n\r\n\n\n//# sourceURL=webpack://nano_bot/./src/component/users/index.js?");
+
+/***/ }),
+
+/***/ "./src/component/users/rootUser.js":
+/*!*****************************************!*\
+  !*** ./src/component/users/rootUser.js ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _Core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Core */ \"./src/component/Core.js\");\n/* harmony import */ var _plagins_nanofetch__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../plagins/nanofetch */ \"./src/component/plagins/nanofetch.js\");\n\r\n\r\n\r\n\r\n\r\n\r\nfunction rootUser () {\r\n\r\n    const config = {\r\n        userName: 'root',\r\n        userPassword: 'root',\r\n        terminalName: 'nano',\r\n        terminalWelcomeText: 'nanoTerm',\r\n        colorTerm: 'root',\r\n        nanoFetchConfig: {\r\n            ascii: {fileName: \"ascii-art (1).txt\", characterСount: 42},\r\n            offset: 0,\r\n            terninal: 'nanoTerm',\r\n            version: '1.0.1',\r\n            user: 'root',\r\n            }\r\n    }\r\n    \r\n    const root = new _Core__WEBPACK_IMPORTED_MODULE_0__[\"default\"](config)\r\n\r\n    const commands = (userTerm) => () => {\r\n        userTerm.сommand('hello', () => {console.log('hi broo')})\r\n        userTerm.сommand('nanoFetch', () => {;(0,_plagins_nanofetch__WEBPACK_IMPORTED_MODULE_1__[\"default\"])(config)})\r\n    }\r\n    \r\n    \r\n    root.setConfig(commands(root))\r\n    \r\n    return root\r\n}\r\n\r\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (rootUser);\r\n\n\n//# sourceURL=webpack://nano_bot/./src/component/users/rootUser.js?");
+
+/***/ }),
+
+/***/ "./src/index.js":
+/*!**********************!*\
+  !*** ./src/index.js ***!
+  \**********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var prompt_sync__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! prompt-sync */ \"./node_modules/prompt-sync/index.js\");\n/* harmony import */ var prompt_sync__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(prompt_sync__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _component_users__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./component/users */ \"./src/component/users/index.js\");\n\r\n\r\nconst prompt = prompt_sync__WEBPACK_IMPORTED_MODULE_0___default()()\r\n\r\nfunction authentication () {\r\n   \r\n    let login = prompt(\"введите логин: \")\r\n\r\n    for(let key in _component_users__WEBPACK_IMPORTED_MODULE_1__){\r\n        if(login == key){\r\n            return _component_users__WEBPACK_IMPORTED_MODULE_1__[key].launch()\r\n        }\r\n    }\r\n\r\n    return authentication()\r\n}\r\n\r\n\r\nauthentication()\r\n\r\n\n\n//# sourceURL=webpack://nano_bot/./src/index.js?");
 
 /***/ }),
 
@@ -280,7 +335,7 @@ module.exports = require("util");
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module can't be inlined because the eval devtool is used.
-/******/ 	var __webpack_exports__ = __webpack_require__("./src/component/NewCore.js");
+/******/ 	var __webpack_exports__ = __webpack_require__("./src/index.js");
 /******/ 	
 /******/ })()
 ;
